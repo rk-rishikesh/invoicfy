@@ -20,7 +20,7 @@ function _Identicon({ address, size: _size }: Props) {
   const size = _size ?? 34;
 
   if (!address || !isValidAddressEvm(address)) {
-    return <Circle size={size} classes="bg-blue-500" title="" />;
+    return <Circle size={size} classes="bg-[#1c2541]" title="" />;
   }
 
   const jazziconResult = jazzicon(size, addressToSeed(address));

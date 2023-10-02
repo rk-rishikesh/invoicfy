@@ -27,7 +27,7 @@ export function SolidButton(
   const base = 'flex items-center justify-center rounded-md transition-all duration-500';
   let baseColors, onHover, onActive;
   if (color === 'blue') {
-    baseColors = 'bg-blue-500 text-white';
+    baseColors = 'bg-[#1c2541] text-white';
     onHover = 'hover:bg-blue-600';
     onActive = 'active:bg-blue-700';
   } else if (color === 'green') {

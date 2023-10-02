@@ -1,17 +1,16 @@
-import React from "react";
-import Image from "next/image";
+import Image from 'next/image';
 
 function Section3() {
   return (
     <div className="py-24">
       <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 mx-4 p-4 sm:p-0 md:p-0 lg:p-0 xl:px-32 space-y-8 relative">
         <div className="flex flex-col justify-center items-start overflow-hidden">
-          <div className="text-black text-xl font-bold">
+          <div className="text-[#1c2541] text-xl font-bold">
             Fast & Easy Cross-Chain Token Payments
           </div>
-          <div className="text-black">
-            Simply pay using your preferred ERC20 tokens, no matter which chain
-            they're from. We'll take care of the cross-chain transactions.
+          <div className="text-[#1c2541]">
+            Simply pay using your preferred ERC20 tokens, no matter which chain they're from. We'll
+            take care of the cross-chain transactions.
           </div>
         </div>
 
@@ -35,13 +34,10 @@ function Section3() {
           />
         </div>
         <div className="flex flex-col justify-center items-start overflow-hidden">
-          <div className="text-black text-xl font-bold">
-            NFT Invoices on the Main Chain
-          </div>
-          <div className="text-black">
-            Your NFT invoice will be generated on the Main chain for maximum
-            security and authenticity. Keep track of all your payments in one
-            place.
+          <div className="text-[#1c2541] text-xl font-bold">NFT Invoices on the Main Chain</div>
+          <div className="text-[#1c2541]">
+            Your NFT invoice will be generated on the Main chain for maximum security and
+            authenticity. Keep track of all your payments in one place.
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ export function WalletControlBar() {
           >
             <div
               style={{ height: 26, width: 26 }}
-              className="bg-blue-500 text-white flex items-center justify-center rounded-full"
+              className="bg-[#1c2541] text-white flex items-center justify-center rounded-full"
             >
               {numReady}
             </div>
