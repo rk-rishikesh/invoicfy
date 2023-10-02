@@ -6,8 +6,8 @@ import Logo from '../../images/logos/app-logo.svg';
 export function Footer() {
   return (
     <footer className="py-4 opacity-80">
-      <div className="flex flex-row justify-between items-center gap-6 sm:gap-0">
-        <div className="flex items-center pt-2">
+      <div className="px-4 flex justify-between items-center max-w-screen-xl mx-auto">
+        <div className="flex items-center">
           <div className="flex">
             <Image src={Logo} width={45} height={45} alt="" />
           </div>

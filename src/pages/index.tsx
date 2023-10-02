@@ -1,17 +1,20 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
+
+import Section1 from '../components/homepage/section1';
+import Section2 from '../components/homepage/section2';
+import Section3 from '../components/homepage/section3';
+import Section4 from '../components/homepage/section4';
+import Section5 from '../components/homepage/section5';
 
 const Home: NextPage = () => {
   return (
-    <div className="space-y-2">
-      <Image
-        src="https://cdn3d.iconscout.com/3d/premium/thumb/electricity-bill-payment-2869818-2384388.png"
-        width={700}
-        height={250}
-        alt=""
-        className="mt-0.5 ml-2 pb-px"
-      />
-    </div>
+    <main>
+      <Section1 />
+      <Section2 />
+      <Section3 />
+      <Section4 />
+      <Section5 />
+    </main>
   );
 };
 
