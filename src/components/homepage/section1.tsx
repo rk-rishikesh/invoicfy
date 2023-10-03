@@ -1,7 +1,10 @@
+import { useRouter } from 'next/navigation';
+
 function Section1() {
+  const router = useRouter();
   return (
     <div className="bg-[#5BC0BE] flex flex-col items-center justify-center h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-32">
-      <div className="font-gloock text-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-9xl">
+      <div className="font-oldStdTT text-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-9xl">
         INVOICYFY
       </div>
 
@@ -11,7 +14,10 @@ function Section1() {
       </div>
 
       <div className="mt-4">
-        <button className="bg-white text-[#0B132B] py-2 px-4 rounded-md hover:bg-[#ceced6] transition duration-300 text-sm sm:text-base">
+        <button
+          onClick={() => router.push('/invoice')}
+          className="bg-white text-[#0B132B] py-2 px-4 rounded-md hover:bg-[#ceced6] transition duration-300 text-sm sm:text-base"
+        >
           Create Invoice
         </button>
       </div>
