@@ -70,7 +70,7 @@ function Invoice() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <input type="radio" id="one-time" name="payment-frequency" value="one-time" />
-              <label htmlFor="one-time" className="ml-2 text-sm font-semibold">
+              <label htmlFor="one-time" className="ml-2 text-sm ">
                 One-time
               </label>
             </div>
@@ -81,7 +81,7 @@ function Invoice() {
                 name="payment-frequency"
                 value="monthly-recurring"
               />
-              <label htmlFor="monthly-recurring" className="ml-2 text-sm font-semibold">
+              <label htmlFor="monthly-recurring" className="ml-2 text-sm ">
                 Monthly Recurring
               </label>
             </div>
