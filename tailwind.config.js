@@ -9,6 +9,8 @@ module.exports = {
       sans: ['Neue Haas Grotesk', 'Helvetica', 'sans-serif'],
       serif: ['Garamond', 'serif'],
       mono: ['Courier New', 'monospace'],
+      gloock: ['Gloock'],
+      golos: ['Golos Text'],
     },
     screens: {
       xs: '480px',

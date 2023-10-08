@@ -19,13 +19,6 @@ export function TransferTokenCard() {
         </div>
         <div className="relative flex items-start justify-between z-20">
           <h2 className="pl-0.5 text-lg">Send Tokens</h2>
-          {/* <IconButton
-          imgSrc={GearIcon}
-          width={20}
-          height={20}
-          title="Settings"
-          classes="hover:rotate-90"
-        /> */}
         </div>
         {tokenRoutes && <TransferTokenForm tokenRoutes={tokenRoutes} />}
         {isLoading && (
