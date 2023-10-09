@@ -51,3 +51,10 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Frank Ruhl Libre';
+  src: url('/fonts/FrankRuhlLibre-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

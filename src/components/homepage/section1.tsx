@@ -1,4 +1,9 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 function Section1() {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center justify-center h-screen px-4 sm:px-8 md:px-16 lg:px-32 xl:px-32 bg-[#A3CEF1]">
       <div className="font-gloock text-black-700 text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-9xl">
@@ -11,7 +16,10 @@ function Section1() {
       </div>
 
       <div className="mt-4">
-        <button className="font-golos bg-[#274C77] text-white py-2 px-4 rounded-md hover:bg-[#355f90] transition duration-300 text-sm sm:text-base">
+        <button
+          onClick={() => router.push('/invoice')}
+          className="font-golos bg-[#274C77] text-white py-2 px-4 rounded-md hover:bg-[#355f90] transition duration-300 text-sm sm:text-base"
+        >
           Create Invoice
         </button>
       </div>

@@ -11,6 +11,7 @@ module.exports = {
       mono: ['Courier New', 'monospace'],
       gloock: ['Gloock'],
       golos: ['Golos Text'],
+      frank: ['Frank Ruhl Libre'],
     },
     screens: {
       xs: '480px',
