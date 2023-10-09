@@ -121,21 +121,8 @@ function Invoice() {
           <div className="font-bold text-4xl font-frank">INVOICE</div>
         </div>
         <div className="border-t border-gray-300 w-full mt-4"></div>
-        <div className="grid grid-cols-2 gap-4 px-16">
+        <div className="grid grid-cols-2 gap-4 px-16 py-4">
           {/* Left Column */}
-          {/* <div className="space-y-2">
-            <div className="flex items-center">
-              <span className="mr-2">Bill To:</span>
-            </div>
-            <div className="flex items-center">
-              <span className="mr-2">Client's Name:</span>
-              <input type="text" className="border rounded p-2" />
-            </div>
-            <div className="flex items-center">
-              <span className="mr-2">Wallet Address:</span>
-              <input type="text" className="border rounded p-2" />
-            </div>
-          </div> */}
           <div className="space-y-4">
             <div className="flex items-center">
               <span className="mr-2">Bill To:</span>
