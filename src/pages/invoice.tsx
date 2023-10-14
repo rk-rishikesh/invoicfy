@@ -3,17 +3,53 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CryptoJS from 'crypto-js';
 import { useEffect, useRef, useState } from 'react';
+import { useAccount } from 'wagmi';
+
+const secretKey = 'secretKey';
 
 library.add(faTimes);
 library.add(faPlus);
 
 function Invoice() {
   const [logoImage, setLogoImage] = useState(null);
+  const [companyName, setCompanyName] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [clientWalletAddress, setClientWalletAddress] = useState('');
+  const [invoiceNumber, setInvoiceNumber] = useState('');
+  const [invoiceDate, setInvoiceDate] = useState('');
+  const [dueDate, setDueDate] = useState('');
   const [products, setProducts] = useState([{ productName: '', quantity: 0, rate: 0, amount: 0 }]);
   const [currency, setCurrency] = useState('');
   const [showCurrencyOptions, setShowCurrencyOptions] = useState(false);
   const currencyButtonRef = useRef(null);
+
+  const { address } = useAccount();
+  // console.log(address, isConnected, status);
+
+  const generatePaymentLink = () => {
+    // Construct the payment link based on the invoice details
+    const invoiceDetails = {
+      billerAddress: address,
+      clientWalletAddress: clientWalletAddress,
+      totalAmount: getTotalAmount(),
+      currency: currency,
+    };
+
+    console.log(invoiceDetails);
+
+    const encryptedData = CryptoJS.AES.encrypt(
+      JSON.stringify(invoiceDetails),
+      secretKey,
+    ).toString();
+
+    // Convert the invoice details to a query string
+    const queryParams = new URLSearchParams({ data: encryptedData }).toString();
+    console.log(queryParams);
+    const paymentGatewayURL = `http://localhost:3000/payment?${queryParams}`;
+    console.log(paymentGatewayURL);
+  };
 
   const handleProductChange = (index, field, value) => {
     const updatedProducts = [...products];
@@ -116,6 +152,8 @@ function Invoice() {
               type="text"
               placeholder="Enter company's name"
               className="border rounded p-2 w-48"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
           <div className="font-bold text-4xl font-frank">INVOICE</div>
@@ -129,11 +167,21 @@ function Invoice() {
             </div>
             <div className="flex items-center">
               <span className="mr-2 w-32">Client's Name:</span>
-              <input type="text" className="border rounded p-2" />
+              <input
+                type="text"
+                className="border rounded p-2"
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
+              />
             </div>
             <div className="flex items-center">
               <span className="mr-2 w-32">Wallet Address:</span>
-              <input type="text" className="border rounded p-2" />
+              <input
+                type="text"
+                className="border rounded p-2"
+                value={clientWalletAddress}
+                onChange={(e) => setClientWalletAddress(e.target.value)}
+              />
             </div>
           </div>
 
@@ -141,44 +189,33 @@ function Invoice() {
           <div className="space-y-4 pl-16">
             <div className="flex items-center">
               <span className="mr-2 w-32">Invoice Number:</span>
-              {/* <input type="text" className="border rounded p-2" /> */}
+              <input
+                type="number"
+                className="border rounded p-2"
+                value={invoiceNumber}
+                onChange={(e) => setInvoiceNumber(e.target.value)}
+              />
             </div>
             <div className="flex items-center">
               <span className="mr-2 w-32">Invoice Date:</span>
-              <input type="date" className="border rounded p-2" />
+              <input
+                type="date"
+                className="border rounded p-2"
+                value={invoiceDate}
+                onChange={(e) => setInvoiceDate(e.target.value)}
+              />
             </div>
             <div className="flex items-center">
               <span className="mr-2 w-32">Due date:</span>
-              <input type="date" className="border rounded p-2" />
+              <input
+                type="date"
+                className="border rounded p-2"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+              />
             </div>
           </div>
         </div>
-        {/* <div className="border-t border-gray-300 w-full mt-4"></div> */}
-        {/* <div className=" border-y py-2 border-gray-300 w-full grid grid-cols-4 px-16">
-          <div>Product(s)</div>
-          <div>Quantity</div>
-          <div>Rate</div>
-          <div>Amount</div>
-        </div>
-        <div className="grid grid-cols-4 px-16">
-          <div className="space-y-2">
-            <input
-              type="text"
-              id="productName"
-              placeholder="Product Name"
-              className="border rounded p-2"
-            />
-          </div>
-          <div className="space-y-2">
-            <input type="number" id="quantity" className="border rounded p-2" />
-          </div>
-          <div className="space-y-2">
-            <input type="number" id="rate" className="border rounded p-2" />
-          </div>
-          <div className="space-y-2">
-            <input type="number" id="amount" className="border rounded p-2" />
-          </div>
-        </div> */}
 
         <div className="border-y py-2 border-gray-300 w-full grid grid-cols-12 px-16">
           <div className="col-span-5">Product(s)</div>
@@ -245,7 +282,10 @@ function Invoice() {
         </div>
       </div>
       <div className="flex justify-center mt-4">
-        <button className="rounded-full bg-[#A3CEF1] text-black font-bold font-frank py-4 mt-4 px-6 hover:bg-[#389BA0]">
+        <button
+          className="rounded-full bg-[#A3CEF1] text-black font-bold font-frank py-4 mt-4 px-6 hover:bg-[#389BA0]"
+          onClick={generatePaymentLink}
+        >
           Generate
         </button>
       </div>
