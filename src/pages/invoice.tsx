@@ -98,8 +98,8 @@ function Invoice() {
   // };
 
   const generatePDF = async () => {
-    // Create a new jsPDF instance with landscape orientation
-    const pdf = new jsPDF('l', 'pt', 'a4');
+    // Create a new jsPDF instance with landscape orientation and larger height
+    const pdf = new jsPDF('l', 'pt', [842, 800]); // Use landscape A4 paper dimensions with increased height
 
     // Generate payment link
     const paymentLink = generatePaymentLink();
@@ -107,8 +107,8 @@ function Invoice() {
     // Convert the component to HTML
     const invoiceHTML = document.getElementById('report');
 
-    // Render the HTML to a canvas with higher DPI
-    const dpi = 300; // Adjust DPI as needed for your desired quality
+    // Render the HTML to a canvas with higher DPI for better quality
+    const dpi = 600; // Adjust DPI as needed for improved quality
     const scale = dpi / 96; // The default DPI is 96, so calculate the scale factor
     const canvas = await html2canvas(invoiceHTML, { scale: scale });
 
@@ -116,7 +116,7 @@ function Invoice() {
     const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
     // Add the image to the PDF
-    pdf.addImage(imgData, 'JPEG', 0, 0, 842, 595); // Use landscape A4 paper dimensions
+    pdf.addImage(imgData, 'JPEG', 0, 0, 842, 800); // Use landscape A4 paper dimensions with increased height
 
     // Position the "Pay Now" button at the bottom right corner with margin
     const text = 'Pay Now';
