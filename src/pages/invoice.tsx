@@ -4,6 +4,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CryptoJS from 'crypto-js';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { useEffect, useRef, useState } from 'react';
 import { useAccount } from 'wagmi';
 
@@ -49,6 +51,93 @@ function Invoice() {
     console.log(queryParams);
     const paymentGatewayURL = `http://localhost:3000/payment?${queryParams}`;
     console.log(paymentGatewayURL);
+    return paymentGatewayURL;
+  };
+
+  // const generatePDF = async () => {
+  //   // Create a new jsPDF instance with landscape orientation
+  //   const pdf = new jsPDF('l', 'pt', 'a4');
+
+  //   // Generate payment link
+  //   const paymentLink = generatePaymentLink();
+
+  //   // Convert the component to HTML
+  //   const invoiceHTML = document.getElementById('report');
+
+  //   // Render the HTML to a canvas with higher DPI
+  //   const dpi = 300; // Adjust DPI as needed for your desired quality
+  //   const scale = dpi / 96; // The default DPI is 96, so calculate the scale factor
+  //   const canvas = await html2canvas(invoiceHTML, { scale: scale });
+
+  //   // Convert the canvas to an image
+  //   const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+  //   // Add the image to the PDF
+  //   pdf.addImage(imgData, 'JPEG', 0, 0, 842, 595); // Use landscape A4 paper dimensions
+
+  //   // Position the "Click to Pay" button at the bottom right corner with margin
+  //   const text = 'Pay Now!';
+  //   const textWidth = pdf.getStringUnitWidth(text) * 16; // Adjust the font size as needed
+  //   const rightX = pdf.internal.pageSize.width - 20 - textWidth; // Adjust the horizontal position to place it at the right with margin
+  //   const bottomY = pdf.internal.pageSize.height - 70; // Adjust the vertical position to place it at the bottom with margin
+
+  //   // Add a rectangle as a background for the button
+  //   pdf.setFillColor(51, 122, 183); // MUI primary color as background color
+  //   pdf.rect(rightX - 5, bottomY - 5, textWidth + 10, 30, 'F'); // 'F' indicates to fill the rectangle
+
+  //   // Set the text color to white for better visibility
+  //   pdf.setTextColor(255, 255, 255);
+
+  //   // Add the payment link as a clickable button
+  //   pdf.text(text, rightX, bottomY + 20).setFontSize(16);
+
+  //   pdf.link(rightX - 5, bottomY - 5, textWidth + 10, 30, { url: paymentLink });
+
+  //   // Save the PDF or open it in a new tab
+  //   pdf.save('invoice.pdf');
+  // };
+
+  const generatePDF = async () => {
+    // Create a new jsPDF instance with landscape orientation
+    const pdf = new jsPDF('l', 'pt', 'a4');
+
+    // Generate payment link
+    const paymentLink = generatePaymentLink();
+
+    // Convert the component to HTML
+    const invoiceHTML = document.getElementById('report');
+
+    // Render the HTML to a canvas with higher DPI
+    const dpi = 300; // Adjust DPI as needed for your desired quality
+    const scale = dpi / 96; // The default DPI is 96, so calculate the scale factor
+    const canvas = await html2canvas(invoiceHTML, { scale: scale });
+
+    // Convert the canvas to an image
+    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+    // Add the image to the PDF
+    pdf.addImage(imgData, 'JPEG', 0, 0, 842, 595); // Use landscape A4 paper dimensions
+
+    // Position the "Pay Now" button at the bottom right corner with margin
+    const text = 'Pay Now';
+    const textWidth = pdf.getStringUnitWidth(text) * 16; // Adjust the font size as needed
+    const rightX = pdf.internal.pageSize.width - 20 - textWidth; // Adjust the horizontal position to place it at the right with margin
+    const bottomY = pdf.internal.pageSize.height - 70; // Adjust the vertical position to place it at the bottom with margin
+
+    // Add a rectangle as a background for the button
+    pdf.setFillColor(39, 76, 119); // Background color: #A3CEF1
+    pdf.rect(rightX, bottomY - 5, textWidth + 10, 40, 'F'); // 'F' indicates to fill the rectangle
+
+    // Set the text color to white for better visibility
+    pdf.setTextColor(255, 255, 255);
+
+    // Add the payment link as a clickable button
+    pdf.text(text, rightX + 5, bottomY + 20).setFontSize(16);
+
+    pdf.link(rightX - 5, bottomY - 5, textWidth + 10, 30, { url: paymentLink });
+
+    // Save the PDF or open it in a new tab
+    pdf.save('invoice.pdf');
   };
 
   const handleProductChange = (index, field, value) => {
@@ -128,7 +217,7 @@ function Invoice() {
         ))}
       </select>
 
-      <div className="bg-white rounded-lg shadow-md py-16 space-y-4">
+      <div className="bg-white rounded-lg shadow-md py-16 space-y-4" id="report">
         <div className="flex justify-between px-16">
           <div className="flex flex-col space-y-4">
             <label
@@ -284,7 +373,7 @@ function Invoice() {
       <div className="flex justify-center mt-4">
         <button
           className="rounded-full bg-[#A3CEF1] text-black font-bold font-frank py-4 mt-4 px-6 hover:bg-[#389BA0]"
-          onClick={generatePaymentLink}
+          onClick={generatePDF}
         >
           Generate
         </button>
