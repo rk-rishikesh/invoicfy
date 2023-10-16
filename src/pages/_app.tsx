@@ -9,7 +9,7 @@ import '@hyperlane-xyz/widgets/styles.css';
 import { ErrorBoundary } from '../components/errors/ErrorBoundary';
 import { AppLayout } from '../components/layout/AppLayout';
 import { EvmWalletContext } from '../features/wallet/EvmWalletContext';
-// import { SolanaWalletContext } from '../features/wallet/SolanaWalletContext';
+import { SolanaWalletContext } from '../features/wallet/SolanaWalletContext';
 import '../styles/fonts.css';
 import '../styles/globals.css';
 import { useIsSsr } from '../utils/ssr';
@@ -33,16 +33,16 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <EvmWalletContext>
-        {/* <SolanaWalletContext> */}
-        <QueryClientProvider client={reactQueryClient}>
-          <Router>
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </Router>
-        </QueryClientProvider>
-        <ToastContainer transition={Zoom} position={toast.POSITION.BOTTOM_RIGHT} limit={2} />
-        {/* </SolanaWalletContext> */}
+        <SolanaWalletContext>
+          <QueryClientProvider client={reactQueryClient}>
+            <Router>
+              <AppLayout>
+                <Component {...pageProps} />
+              </AppLayout>
+            </Router>
+          </QueryClientProvider>
+          <ToastContainer transition={Zoom} position={toast.POSITION.BOTTOM_RIGHT} limit={2} />
+        </SolanaWalletContext>
       </EvmWalletContext>
     </ErrorBoundary>
   );

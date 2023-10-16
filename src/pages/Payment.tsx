@@ -50,7 +50,7 @@ const Payment: NextPage = () => {
     <div className="flex justify-center items-center h-screen">
       <div className="space-y-2">
         <TipCard />
-        <TransferTokenCard />
+        <TransferTokenCard invoiceDetails={invoiceDetails} />
       </div>
     </div>
   );

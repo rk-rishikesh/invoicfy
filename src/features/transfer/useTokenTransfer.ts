@@ -98,6 +98,7 @@ async function executeTransfer({
   setIsLoading: (b: boolean) => void;
   onDone?: () => void;
 }) {
+  console.log(values);
   logger.debug('Preparing transfer transaction(s)');
   setIsLoading(true);
   let status: TransferStatus = TransferStatus.Preparing;
