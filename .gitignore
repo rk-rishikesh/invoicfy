@@ -28,6 +28,5 @@ db.json
 /.github
 /.next
 /.vscode
-/.yarn
 /package-lock.json
 /yarn.lock
